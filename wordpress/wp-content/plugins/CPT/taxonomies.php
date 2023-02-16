@@ -7,12 +7,12 @@
  */
 function CPT_type_init()
 {
-    register_taxonomy('type', ['post'], [
+    register_taxonomy('cpt_type', ['post'], [
         'hierarchical'          => true,
         'public'                => true,
         'show_in_nav_menus'     => true,
         'show_ui'               => true,
-        'show_admin_column'     => false,
+        'show_admin_column'     => true,
         'query_var'             => true,
         'rewrite'               => true,
         'capabilities'          => [
@@ -46,7 +46,6 @@ function CPT_type_init()
             'back_to_items'              => __('&larr; Back to Types', 'CPT-TEXTDOMAIN'),
         ],
         'show_in_rest'          => true,
-        'rest_base'             => 'type',
         'rest_controller_class' => 'WP_REST_Terms_Controller',
     ]);
 }

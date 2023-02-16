@@ -3,9 +3,11 @@
 class Timer
 {
     static private $time_obj= array();
+    static private $time_diff = array();
     public static function getInstance()
     {
         add_action('all', 'Timer::time_start');
+        add_action('shutdown', 'Timer::write_file');
     }
 
     public static function time_start()
@@ -18,11 +20,19 @@ class Timer
         add_action($current, 'Timer::time_end', 999999999,1);
     }
 
+    public static function write_file()
+    {
+        $_str='';
+        foreach (Timer::$time_diff as $current => $time_taken) {
+            $_str.='The filter name: '. $current.' Time taken by my_filter: ' . $time_taken . " seconds \n";
+        }
+        Timer::write($_str);
+    }
+
     public static function time_end()
     {
         $current = current_action();
-        $time_taken = microtime(true) - Timer::$time_obj[$current];
-        Timer::write('The filter name: '. $current.' Time taken by my_filter: ' . $time_taken . " seconds \n");
+        Timer::$time_diff[$current] = microtime(true) - Timer::$time_obj[$current];
         remove_filter($current, 'Timer::time_end', 999999999, 1);
     }
     public static function write($text)

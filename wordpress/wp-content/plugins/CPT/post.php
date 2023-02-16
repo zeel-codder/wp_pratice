@@ -49,7 +49,7 @@ function CPT_books_init()
             'show_ui'               => true,
             'show_in_nav_menus'     => false,
             'supports'              => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions'],
-            'taxonomies'            => ['type'],
+            'taxonomies'            => ['cpt_type','post_tag'],
             'has_archive'           => true,
             'rewrite'               => true,
             'query_var'             => true,
