@@ -13,8 +13,10 @@ function CPT_books_init()
  * Got to labels when you want to edit the name display on admin page. it can be sidebar name or table view item. you can also edit 
  * the editor item name.
  * Thumbnail will map to fechner image
+ * public is false then the users will not able to show the pages on frontend. also you can't show the view option
+ * on admin page.
  * */
-        'books',
+        'post',
         [
             'labels'                => [
                 'name'                  => __('Books', 'CPT-TEXTDOMAIN'),
@@ -43,11 +45,11 @@ function CPT_books_init()
                 'parent_item_colon'     => __('Parent Book:', 'CPT-TEXTDOMAIN'),
                 'menu_name'             => __('Books', 'CPT-TEXTDOMAIN'),
             ],
-            'public'                => false,
+            'public'                => true,
             'description'           => 'This is demo book which i want to use.',
             'hierarchical'          => false,
             'show_ui'               => true,
-            'show_in_nav_menus'     => false,
+            'show_in_nav_menus'     => true,
             'supports'              => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions'],
             'taxonomies'            => ['cpt_type','post_tag'],
             'has_archive'           => true,
