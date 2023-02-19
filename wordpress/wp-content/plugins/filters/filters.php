@@ -1,9 +1,9 @@
 <?php
 /*
  * Plugin Name:       Filters
-*/
+ */
 
-require_once __DIR__.'/me.php';
+require_once __DIR__ . '/me.php';
 
 // function add_class_to_body1($classes,$class)
 // {
@@ -46,10 +46,8 @@ require_once __DIR__.'/me.php';
 // }
 
 /* 
-
 When we call this function all the filters related to this name will be executed.
 like same this do_actions works in actions.
-
 */
 
 // This filters will not print anything because we are adding filters after this file.

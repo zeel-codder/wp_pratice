@@ -18,8 +18,10 @@
 		</properties>
 	</rule>
 
+	<rule ref="WordPress-VIP-Go" />
 	<rule ref="WordPress-Docs" />
 	<rule ref="WordPress-Extra" />
+	<rule ref="PHPCompatibilityWP"/>
 
 	<config name="testVersion" value="8.0-"/>
 

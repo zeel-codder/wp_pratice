@@ -72,16 +72,16 @@ for ( $i = 1; $i <= $count; $i++ ) {
 
 	$message = $pop3->get( $i );
 
-	$bodysignal = false;
-	$boundary = '';
-	$charset = '';
-	$content = '';
-	$content_type = '';
+	$bodysignal                = false;
+	$boundary                  = '';
+	$charset                   = '';
+	$content                   = '';
+	$content_type              = '';
 	$content_transfer_encoding = '';
-	$post_author = 1;
-	$author_found = false;
-	$post_date = null;
-	$post_date_gmt = null;
+	$post_author               = 1;
+	$author_found              = false;
+	$post_date                 = null;
+	$post_date_gmt             = null;
 
 	foreach ( $message as $line ) {
 		// Body signal.
@@ -139,7 +139,7 @@ for ( $i = 1; $i <= $count; $i++ ) {
 				if ( is_email( $author ) ) {
 					$userdata = get_user_by( 'email', $author );
 					if ( ! empty( $userdata ) ) {
-						$post_author = $userdata->ID;
+						$post_author  = $userdata->ID;
 						$author_found = true;
 					}
 				}
@@ -148,17 +148,17 @@ for ( $i = 1; $i <= $count; $i++ ) {
 			if ( preg_match( '/Date: /i', $line ) ) { // Of the form '20 Mar 2002 20:32:37 +0100'.
 				$ddate = str_replace( 'Date: ', '', trim( $line ) );
 				// Remove parenthesised timezone string if it exists, as this confuses strtotime().
-				$ddate = preg_replace( '!\s*\(.+\)\s*$!', '', $ddate );
+				$ddate           = preg_replace( '!\s*\(.+\)\s*$!', '', $ddate );
 				$ddate_timestamp = strtotime( $ddate );
-				$post_date = gmdate( 'Y-m-d H:i:s', $ddate_timestamp + $time_difference );
-				$post_date_gmt = gmdate( 'Y-m-d H:i:s', $ddate_timestamp );
+				$post_date       = gmdate( 'Y-m-d H:i:s', $ddate_timestamp + $time_difference );
+				$post_date_gmt   = gmdate( 'Y-m-d H:i:s', $ddate_timestamp );
 			}
 		}
 	}
 
 	// Set $post_status based on $author_found and on author's publish_posts capability.
 	if ( $author_found ) {
-		$user = new WP_User( $post_author );
+		$user        = new WP_User( $post_author );
 		$post_status = ( $user->has_cap( 'publish_posts' ) ) ? 'publish' : 'pending';
 	} else {
 		// Author not found in DB, set status to pending. Author already set to admin.
